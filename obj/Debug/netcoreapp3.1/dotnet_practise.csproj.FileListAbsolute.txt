@@ -129,3 +129,5 @@ D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\staticwebassets\
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.dll
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.pdb
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.genruntimeconfig.cache
+D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\samples\shoppingCart2.json
+D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\samples\items.json

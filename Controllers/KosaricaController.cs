@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using dotnet_practise.Models;
+using System.IO;
+using Newtonsoft.Json;
+using dotnet_practise.Services;
 
 namespace dotnet_practise.Controllers
 {
@@ -20,6 +23,15 @@ namespace dotnet_practise.Controllers
 
         public IActionResult Index()
         {
+            IList<Proizvod> items = new List<Proizvod>();
+
+            using (StreamReader r = new StreamReader("./samples/items.json"))
+            {
+                string json = r.ReadToEnd();
+                items = JsonConvert.DeserializeObject<List<Proizvod>>(json);
+            }
+
+            ViewData["items"] = items;
             return View();
         }
 
@@ -28,6 +40,22 @@ namespace dotnet_practise.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public ActionResult obrisiProizvod(string ime)
+        {
+            Baza.dodajEvent("remove", ime);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult kupi()
+        {
+            Baza.dodajEvent("final");
+            return RedirectToAction("Index", "Aplikacija");
+
+
         }
     }
 }

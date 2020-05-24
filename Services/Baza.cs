@@ -44,21 +44,28 @@ namespace dotnet_practise.Services
             return eventData;
         }
 
-        public static void dodajEvent(string type)
+        public static void dodajEvent(string type, string item = "", string price = "")
         {
             var streamName = Globals.streamName;
             var eventType = "";
-            var data = "";
-            var metadata = "{}";
+            var data = "{ \"Name\": \"";
+            String timeStamp = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK");
+            var metadata = "{ \"User\": \"korisnik\", \"TimeStamp\": \"";
+            metadata += timeStamp;
+            metadata += "\"";
             switch (type)
             {
                 case "add":
                     eventType = "ItemAdded";
-                    data = "";
+                    data += item;
+                    data += "\", \"Price\": \"";
+                    data += price;
+                    data += "\"}";
                     break;
                 case "remove":
                     eventType = "ItemRemoved";
-                    data = "";
+                    data += item;
+                    data += "\"}";
                     break;
                 case "final":
                     eventType = "Purchased";
@@ -69,6 +76,8 @@ namespace dotnet_practise.Services
             var eventPayload = new EventData(Guid.NewGuid(), eventType, true, Encoding.UTF8.GetBytes(data), Encoding.UTF8.GetBytes(metadata));
             var conn = CreateConnection();
             conn.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventPayload).Wait();
+
+            conn.Close();
 
         }
 
@@ -81,6 +90,8 @@ namespace dotnet_practise.Services
 
             conn.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData).Wait();
             Console.WriteLine($"Uploadano {step1EventData.Count} eventa u '{Globals.streamName}'");
+
+            conn.Close();
         }
 
         
@@ -102,8 +113,9 @@ namespace dotnet_practise.Services
                 streamEvents.AddRange(currentSlice.Events);
             } while (!currentSlice.IsEndOfStream);
 
+            conn.Close();
             return streamEvents;
-            
+
             
         }
 

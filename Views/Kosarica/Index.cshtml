@@ -5,3 +5,34 @@
 <div class="text-center">
     <h1 class="display-4">Košarica</h1>
 </div>
+
+<div class="text-center">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Proizvod</th>
+                <th scope="col">Cijena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int id = 1;}
+            @foreach (var item in ViewData["items"] as IList<Proizvod>)
+            {
+                <tr>
+                    <form method="post" action="@Url.Action("obrisiProizvod", "Kosarica")">
+                        <th scope="row">@id</th>
+                        <td><input type="hidden" name="ime" value=@item.Name />@item.Name</td>
+                        <td><input type="hidden" name="cijena" value=@item.Price />@item.Price</td>
+                        <td><input type="submit" name="remove" value="Obriši iz košarice" class="btn btn-outline-danger" /></td>
+                    </form>
+                </tr>
+                id++;
+            }
+        </tbody>
+    </table>
+    <form method="post" action="@Url.Action("kupi", "Kosarica")">
+        <input type="submit" name="buy" value="Izvrši kupnju" class="btn btn-outline-success" />
+    </form>
+
+</div>
