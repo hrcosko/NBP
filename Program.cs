@@ -16,18 +16,12 @@ namespace dotnet_practise
 {
     public class Program
     {
-        public static void Main(string[] args)
+
+    public static void Main(string[] args)
         {
-            if ("napuniBazu".Equals(args[0]))
+            if ("napuniStream".Equals(args[0]))
             {
-                try
-                {
-                    Baza.napuniStream();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.GetBaseException().Message);
-                }
+                Baza.napuniStream();
             }
             CreateHostBuilder(args).Build().Run();
         }
