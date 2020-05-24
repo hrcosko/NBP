@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Aplikacija";
+}
+
+<div class="text-center">
+    <h1 class="display-4"> Aplikacija za praćenje korisničkih radnji pomoću Eventstore baze</h1>
+    <p>Koristimo  <a href="https://eventstore.com"> Evenstore </a>bazu podataka.</p>
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Proizvod</th>
+          </tr>
+        </thead>
+        <tbody>
+            @{int id = 1;}
+            @foreach (var item in ViewData["items"] as IList<String>)
+            {
+                <tr>
+                    <th scope="row">@id</th>
+                    <td>@item</td>
+                    <td><input type="submit" name="add" value="Dodaj u košaricu" class="btn btn-outline-dark" /></td>
+                </tr>
+                id++;
+            }
+        </tbody>
+    </table>
+    
+</div>
+
+

@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "/VvygykOS3dcnKYg0p3iMARJr4roJxG6W4KHlTox1PezmCd3hg1K6kP8z6WFp3pMnxHUZa9mnp6JSFGapX/H2g==",
+  "dgSpecHash": "cfTHiqJSTnuWqFiV95tr7zlip+GgYR07iVRht8d+S2ehgnq7CCU/QaY9zwLaetv9o8zcL2om2aWLXktfe3ldUA==",
   "success": true,
-  "projectFilePath": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/EventStoreNBP/EventStoreNBP.csproj",
+  "projectFilePath": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/dotnet_practise/dotnet_practise.csproj",
   "expectedPackageFiles": [
     "/home/hrcosko/.nuget/packages/eventstore.client/5.0.8/eventstore.client.5.0.8.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/microsoft.netcore.platforms/2.1.0/microsoft.netcore.platforms.2.1.0.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/microsoft.win32.primitives/4.3.0/microsoft.win32.primitives.4.3.0.nupkg.sha512",
-    "/home/hrcosko/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/home/hrcosko/.nuget/packages/newtonsoft.json/11.0.2/newtonsoft.json.11.0.2.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/protobuf-net/2.4.0/protobuf-net.2.4.0.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl/4.3.2/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl/4.3.2/runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
