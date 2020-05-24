@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using System.Text;
 using EventStore.ClientAPI;
-
+using dotnet_practise.Services;
 
 namespace dotnet_practise
 {
@@ -18,6 +18,17 @@ namespace dotnet_practise
     {
         public static void Main(string[] args)
         {
+            if ("napuniBazu".Equals(args[0]))
+            {
+                try
+                {
+                    Baza.napuniStream();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.GetBaseException().Message);
+                }
+            }
             CreateHostBuilder(args).Build().Run();
         }
 

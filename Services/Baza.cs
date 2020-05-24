@@ -12,8 +12,8 @@ using Newtonsoft.Json;
 using ConsoleLogger = EventStore.ClientAPI.Common.Log.ConsoleLogger;
 
 using dotnet_practise.Models;
-
-
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace dotnet_practise.Services
 {
@@ -26,6 +26,8 @@ namespace dotnet_practise.Services
             conn.ConnectAsync().Wait();
             return conn;
         }
+
+
 
         private static List<EventData> ProcessEvents(String filePath)
         {
@@ -40,6 +42,34 @@ namespace dotnet_practise.Services
             }
 
             return eventData;
+        }
+
+        public static void dodajEvent(string type)
+        {
+            var streamName = Globals.streamName;
+            var eventType = "";
+            var data = "";
+            var metadata = "{}";
+            switch (type)
+            {
+                case "add":
+                    eventType = "ItemAdded";
+                    data = "";
+                    break;
+                case "remove":
+                    eventType = "ItemRemoved";
+                    data = "";
+                    break;
+                case "final":
+                    eventType = "Purchased";
+                    data = "";
+                    break;
+            }
+
+            var eventPayload = new EventData(Guid.NewGuid(), eventType, true, Encoding.UTF8.GetBytes(data), Encoding.UTF8.GetBytes(metadata));
+            var conn = CreateConnection();
+            conn.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventPayload).Wait();
+
         }
 
         public static void napuniStream()
