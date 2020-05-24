@@ -2,35 +2,37 @@
     ViewData["Title"] = "Aplikacija";
 }
 
-<div class="text-center">
-    <h1 class="display-4"> Aplikacija za praćenje korisničkih radnji pomoću Eventstore baze</h1>
-    <p>Koristimo  <a href="https://eventstore.com"> Evenstore </a>bazu podataka.</p>
+    <div class="text-center">
+        <h1 class="display-4"> Aplikacija za praćenje korisničkih radnji pomoću Event store baze</h1>
+        <p>Koristimo  <a href="https://eventstore.com"> Evenstore </a>bazu podataka.</p>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Proizvod</th>
-                <th scope="col">Cijena</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{int id = 1;}
-            @foreach (var item in ViewData["items"] as IList<Proizvod>)
-            {
-            <tr>
-                <form method="post" action="@Url.Action("dodajProizvod", "Aplikacija")">
-                    <th scope="row">@id</th>
-                    <td><input type="hidden" name="ime" value=@item.Name />@item.Name</td>
-                    <td><input type="hidden" name="cijena" value=@item.Price />@item.Price</td>
-                    <td><input type="submit" name="add" value="Dodaj u košaricu" class="btn btn-outline-dark" /></td>
-                </form>
-            </tr>
-                id++;
-            }
-        </tbody>
-    </table>
+        <div class="alert alert-success" id="dodan" role="alert" style="display:none;">Uspješno dodan proizvod</div>
 
-</div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Proizvod</th>
+                    <th scope="col">Cijena</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int id = 1;}
+                @foreach (var item in ViewData["items"] as IList<Proizvod>)
+                {
+                    <tr>
+                        <form method="post" action="@Url.Action("dodajProizvod", "Aplikacija")">
+                            <th scope="row">@id</th>
+                            <td><input type="hidden" name="ime" value=@item.Name />@item.Name</td>
+                            <td><input type="hidden" name="cijena" value=@item.Price />@item.Price</td>
+                            <td><input type="submit" name="add" value="Dodaj u košaricu" @{if (true)} class="btn btn-outline-dark" @{else} class="btn btn-outline-success" /></td>
+                        </form>
+                    </tr>
+                    id++;
+                }
+            </tbody>
+        </table>
+
+    </div>
 
 

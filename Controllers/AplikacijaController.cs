@@ -30,6 +30,7 @@ namespace dotnet_practise.Controllers
             }
 
             ViewData["items"] = items;
+            //bool property za boju buttona
             return View();
         }
 
