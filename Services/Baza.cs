@@ -14,20 +14,18 @@ using ConsoleLogger = EventStore.ClientAPI.Common.Log.ConsoleLogger;
 using dotnet_practise.Models;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace dotnet_practise.Services
 {
     public static class Baza
     {
-        
         private static IEventStoreConnection CreateConnection()
         {
             var conn = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
             conn.ConnectAsync().Wait();
             return conn;
         }
-
-
 
         private static List<EventData> ProcessEvents(String filePath)
         {
@@ -38,7 +36,7 @@ namespace dotnet_practise.Services
                 var id = @event.eventId.ToString();
                 var eventType = @event.eventType.ToString();
                 eventData.Add(new EventData(Guid.Parse(id), eventType, true,
-                    Encoding.UTF8.GetBytes(@event.data.ToString()), null));
+                    Encoding.UTF8.GetBytes(@event.data.ToString()), Encoding.UTF8.GetBytes(@event.metadata.ToString())));
             }
 
             return eventData;
@@ -81,6 +79,7 @@ namespace dotnet_practise.Services
 
             conn.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData).Wait();
             Console.WriteLine($"Uploadano {step1EventData.Count} eventa u '{Globals.streamName}'");
+            conn.Close();
         }
 
         
@@ -102,10 +101,97 @@ namespace dotnet_practise.Services
                 streamEvents.AddRange(currentSlice.Events);
             } while (!currentSlice.IsEndOfStream);
 
-            return streamEvents;
-            
-            
+            conn.Close();
+
+            return streamEvents;          
         }
 
+        public static List<string> dohvatiKosaricuZaKorisnika()
+        {
+            var conn = CreateConnection();
+
+            var stanjeKosarice = new List<string>();
+            StreamEventsSlice currentSlice;
+            long nextSliceStart = StreamPosition.Start;
+            do
+            {
+                currentSlice = conn.ReadStreamEventsForwardAsync(Globals.streamName, nextSliceStart, 100, true).Result;
+                foreach (var evt in currentSlice.Events)
+                {
+                dynamic metadata = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Metadata));
+                if ("korisnik".Equals(metadata.User.ToString()))
+                {
+                    dynamic data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
+                    var eventType = evt.Event.EventType;
+                    switch (eventType)
+                    {
+                        case "ItemAdded":
+                            stanjeKosarice.Add(data.Name.ToString());
+                            break;
+                        case "ItemRemoved":
+                            stanjeKosarice.RemoveAt(stanjeKosarice.LastIndexOf(data.Name.ToString()));
+                            break;
+                        case "Purchased":
+                            stanjeKosarice = new List<string>();
+                            break;
+                        }
+                    }
+                }
+                nextSliceStart = currentSlice.NextEventNumber;
+
+            } while (!currentSlice.IsEndOfStream);
+            conn.Close();
+            return stanjeKosarice;
+        }
+
+        public static List<String> ZaPreporuku() 
+        {
+            var conn = CreateConnection();
+
+            var zaPreporuku = new List<string>();
+            StreamEventsSlice currentSlice;
+            long nextSliceStart = StreamPosition.End;
+            Boolean purchasedIn5min = false;
+            DateTime time = new DateTime();
+            do
+            {
+                currentSlice = conn.ReadStreamEventsBackwardAsync(Globals.streamName, nextSliceStart, 100, false).Result;
+                foreach (var evt in currentSlice.Events)
+                {
+                    dynamic data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
+                    var eventType = evt.Event.EventType;
+                    dynamic metadata = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Metadata));
+                    if ("korisnik".Equals(metadata.User.ToString()))
+                    {
+                        if (!purchasedIn5min)
+                        {
+                            if ("Purchased".Equals(eventType))
+                            {
+                                purchasedIn5min = true;
+                                time = DateTime.Parse(metadata.TimeStamp.ToString());
+                            }
+                        }
+                        else
+                        {
+                            if (time.Subtract(DateTime.Parse(metadata.TimeStamp.ToString())) < TimeSpan.FromMinutes(5))
+                            {
+                                if ("ItemRemoved".Equals(eventType))
+                                {
+                                    zaPreporuku.Add(data.Name.ToString());
+                                }
+                            }
+                            else
+                            {
+                                purchasedIn5min = false;
+                            }
+                        }
+                    }
+                }
+                nextSliceStart = currentSlice.NextEventNumber;
+
+            } while (!currentSlice.IsEndOfStream);
+            conn.Close();
+            return zaPreporuku;
+        }
     }
 }

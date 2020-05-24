@@ -18,11 +18,20 @@ namespace dotnet_practise
     {
 
     public static void Main(string[] args)
-        {
-            if ("napuniStream".Equals(args[0]))
+        { 
+            if ("napuniBazu".Equals(args[0]))
             {
-                Baza.napuniStream();
+                try
+                {
+                    Baza.napuniStream();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.GetBaseException().Message);
+                }
             }
+     //       Baza.dohvatiKosaricuZaKorisnika();
+            Baza.ZaPreporuku();
             CreateHostBuilder(args).Build().Run();
         }
 
