@@ -3,7 +3,7 @@
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1167",
         "eventType": "ItemAdded",
         "data": {
-            "Description": "Xbox One Elite (Console)",
+            "Name": "Xbox One Elite (Console)",
             "Price": 1500
         },
         "metadata": {

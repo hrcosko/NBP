@@ -39,7 +39,7 @@ namespace dotnet_practise.Services
                 var id = @event.eventId.ToString();
                 var eventType = @event.eventType.ToString();
                 eventData.Add(new EventData(Guid.Parse(id), eventType, true,
-                    Encoding.UTF8.GetBytes(@event.data.ToString()), null));
+                    Encoding.UTF8.GetBytes(@event.data.ToString()), Encoding.UTF8.GetBytes(@event.metadata.ToString())));
             }
 
             return eventData;
@@ -177,7 +177,6 @@ namespace dotnet_practise.Services
                 currentSlice = conn.ReadStreamEventsBackwardAsync(Globals.streamName, nextSliceStart, 100, false).Result;
                 foreach (var evt in currentSlice.Events)
                 {
-                    
                     var eventType = evt.Event.EventType;
                     dynamic metadata = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Metadata));
                     if ("korisnik".Equals(metadata.User.ToString()))
@@ -194,7 +193,6 @@ namespace dotnet_practise.Services
                         }
                         else
                         {
-                            Console.WriteLine("tu sam");
                             if (time.Subtract(DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null)) < TimeSpan.FromMinutes(5))
                             {
                                 if ("ItemRemoved".Equals(eventType))
