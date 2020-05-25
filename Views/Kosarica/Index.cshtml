@@ -22,7 +22,7 @@
                 <tr>
                     <form method="post" action="@Url.Action("obrisiProizvod", "Kosarica")">
                         <th scope="row">@id</th>
-                        <td><input type="hidden" name="ime" value=@item.Name />@item.Name</td>
+                        <td><input type="hidden" name="ime" value="@item.Name" />@item.Name</td>
                         <td><input type="hidden" name="cijena" value=@item.Price />@item.Price</td>
                         <td><input type="submit" name="remove" value="Obriši iz košarice" class="btn btn-outline-danger" /></td>
                     </form>

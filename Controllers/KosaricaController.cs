@@ -23,7 +23,14 @@ namespace dotnet_practise.Controllers
 
         public IActionResult Index()
         {
-            IList<Proizvod> items = new List<Proizvod>();
+            IList<Proizvod> items = new List<Proizvod>(); //lista svih proizvoda
+
+            IList<string> stanje = new List<string>(); //lista stringova s imenima proizvoda u kosarici
+
+            IList<Proizvod> stanjePr = new List<Proizvod>(); //lista proizvoda u kosarici
+
+
+            stanje = Baza.dohvatiKosaricuZaKorisnika();
 
             using (StreamReader r = new StreamReader("./samples/items.json"))
             {
@@ -31,7 +38,20 @@ namespace dotnet_practise.Controllers
                 items = JsonConvert.DeserializeObject<List<Proizvod>>(json);
             }
 
-            ViewData["items"] = items;
+
+            foreach (var it in stanje)
+            {
+                foreach (var p in items)
+                {
+                    if (it.Equals(p.Name))
+                    {
+                        stanjePr.Add(p);
+                        break;
+                    }
+                }
+            }
+
+            ViewData["items"] = stanjePr;
             return View();
         }
 

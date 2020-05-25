@@ -102,7 +102,6 @@ D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\System.ServiceMo
 D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\System.ServiceModel.dll
 D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Private.ServiceModel.dll
 D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Private.ServiceModel.dll
-D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.csprojAssemblyReference.cache
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.AssemblyInfoInputs.cache
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.AssemblyInfo.cs
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.MvcApplicationPartsAssemblyInfo.cache
@@ -131,3 +130,4 @@ D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.
 D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.genruntimeconfig.cache
 D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\samples\shoppingCart2.json
 D:\10. semestar\nbp\projekt\projekt\NBP\bin\Debug\netcoreapp3.1\samples\items.json
+D:\10. semestar\nbp\projekt\projekt\NBP\obj\Debug\netcoreapp3.1\dotnet_practise.csprojAssemblyReference.cache

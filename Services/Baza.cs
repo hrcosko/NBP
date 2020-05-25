@@ -14,6 +14,7 @@ using ConsoleLogger = EventStore.ClientAPI.Common.Log.ConsoleLogger;
 using dotnet_practise.Models;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace dotnet_practise.Services
 {
@@ -52,7 +53,7 @@ namespace dotnet_practise.Services
             String timeStamp = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK");
             var metadata = "{ \"User\": \"korisnik\", \"TimeStamp\": \"";
             metadata += timeStamp;
-            metadata += "\"";
+            metadata += "\"}";
             switch (type)
             {
                 case "add":
@@ -117,6 +118,103 @@ namespace dotnet_practise.Services
             return streamEvents;
 
             
+        }
+
+        public static List<string> dohvatiKosaricuZaKorisnika()
+        {
+            var conn = CreateConnection();
+
+            var stanjeKosarice = new List<string>();
+            StreamEventsSlice currentSlice;
+            long nextSliceStart = StreamPosition.Start;
+            do
+            {
+                currentSlice = conn.ReadStreamEventsForwardAsync(Globals.streamName, nextSliceStart, 100, true).Result;
+                foreach (var evt in currentSlice.Events)
+                {
+                    Console.WriteLine(Encoding.UTF8.GetString(evt.Event.Metadata, 0, evt.Event.Metadata.Length));
+                    Console.WriteLine(Encoding.UTF8.GetString(evt.Event.Data, 0, evt.Event.Data.Length));
+                    dynamic metadata = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Metadata));
+                if ("korisnik".Equals(metadata.User.ToString()))
+                {
+                    var eventType = evt.Event.EventType;
+                    //Console.WriteLine(data.Name);
+                    switch (eventType)
+                    {
+                        case "ItemAdded":
+                            dynamic data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
+                            stanjeKosarice.Add(data.Name.ToString());
+                            break;
+                        case "ItemRemoved":
+                            data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
+                            stanjeKosarice.RemoveAt(stanjeKosarice.LastIndexOf(data.Name.ToString()));
+                            break;
+                        case "Purchased":
+                            stanjeKosarice = new List<string>();
+                            break;
+                        }
+                    }
+                }
+                nextSliceStart = currentSlice.NextEventNumber;
+
+            } while (!currentSlice.IsEndOfStream);
+            conn.Close();
+            //Console.WriteLine(stanjeKosarice.Count.ToString());
+            return stanjeKosarice;
+        }
+
+        public static List<String> ZaPreporuku()
+        {
+            var conn = CreateConnection();
+
+            var zaPreporuku = new List<string>();
+            StreamEventsSlice currentSlice;
+            long nextSliceStart = StreamPosition.End;
+            Boolean purchasedIn5min = false;
+            DateTime time = new DateTime();
+            do
+            {
+                currentSlice = conn.ReadStreamEventsBackwardAsync(Globals.streamName, nextSliceStart, 100, false).Result;
+                foreach (var evt in currentSlice.Events)
+                {
+                    
+                    var eventType = evt.Event.EventType;
+                    dynamic metadata = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Metadata));
+                    if ("korisnik".Equals(metadata.User.ToString()))
+                    {
+                        if (!purchasedIn5min)
+                        {
+                            if ("Purchased".Equals(eventType))
+                            {
+                                purchasedIn5min = true;
+                                Console.WriteLine(metadata.TimeStamp.ToString());
+                                time = DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null);
+                                //time = DateTime.Parse(metadata.TimeStamp.ToString());
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("tu sam");
+                            if (time.Subtract(DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null)) < TimeSpan.FromMinutes(5))
+                            {
+                                if ("ItemRemoved".Equals(eventType))
+                                {
+                                    dynamic data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
+                                    zaPreporuku.Add(data.Name.ToString());
+                                }
+                            }
+                            else
+                            {
+                                purchasedIn5min = false;
+                            }
+                        }
+                    }
+                }
+                nextSliceStart = currentSlice.NextEventNumber;
+
+            } while (!currentSlice.IsEndOfStream);
+            conn.Close();
+            return zaPreporuku;
         }
 
     }
