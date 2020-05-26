@@ -56,7 +56,7 @@ namespace dotnet_practise.Controllers
             ViewData["items"] = stanjePr;
             ViewData["brojProizvoda"] = stanjePr.Count;
             Globals.brPr = stanjePr.Count;
-            Console.WriteLine("proizvodi u kosarici: {0}", ViewData["brojProizvoda"]);
+            //Console.WriteLine("proizvodi u kosarici: {0}", ViewData["brojProizvoda"]);
             ViewData["ukupno"] = Globals.ukupnaCijena.ToString();
             return View();
         }
@@ -79,6 +79,7 @@ namespace dotnet_practise.Controllers
         public ActionResult kupi()
         {
             Baza.dodajEvent("final");
+            Globals.brPr = 0;
             return RedirectToAction("Index", "Aplikacija");
 
 

@@ -3677,26 +3677,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jelen\\.nuget\\packages\\": {}
+    "/home/hrcosko/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\10. semestar\\nbp\\projekt\\projekt\\NBP\\dotnet_practise.csproj",
+      "projectUniqueName": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/NBP/dotnet_practise.csproj",
       "projectName": "dotnet_practise",
-      "projectPath": "D:\\10. semestar\\nbp\\projekt\\projekt\\NBP\\dotnet_practise.csproj",
-      "packagesPath": "C:\\Users\\jelen\\.nuget\\packages\\",
-      "outputPath": "D:\\10. semestar\\nbp\\projekt\\projekt\\NBP\\obj\\",
+      "projectPath": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/NBP/dotnet_practise.csproj",
+      "packagesPath": "/home/hrcosko/.nuget/packages/",
+      "outputPath": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/NBP/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jelen\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/hrcosko/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3736,7 +3734,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
       }
     }
   }

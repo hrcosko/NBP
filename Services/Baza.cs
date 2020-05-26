@@ -174,6 +174,7 @@ namespace dotnet_practise.Services
                                 if (data.Name.ToString().Equals(item.Name))
                                 {
                                     Globals.ukupnaCijena -= Int32.Parse(item.Price);
+                                    //Console.WriteLine("ukpna {0} {1}", Globals.ukupnaCijena,Int32.Parse(item.Price));
                                     break;
                                 }
                             }
@@ -181,6 +182,7 @@ namespace dotnet_practise.Services
                         case "Purchased":
                             stanjeKosarice = new List<string>();
                             Globals.ukupnaCijena = 0;
+                            //Globals.brPr = 0;
                             break;
                         }
                     }
@@ -190,7 +192,7 @@ namespace dotnet_practise.Services
             } while (!currentSlice.IsEndOfStream);
             conn.Close();
             //Console.WriteLine(stanjeKosarice.Count.ToString());
-            Console.WriteLine(Globals.ukupnaCijena.ToString());
+            //Console.WriteLine(Globals.ukupnaCijena.ToString());
             return stanjeKosarice;
         }
 

@@ -37,7 +37,7 @@ namespace dotnet_practise.Controllers
             Globals.items = items;
             ViewData["items"] = items;
             ViewData["preporuceno"] = preporuceno;
-            Console.WriteLine("proizvodi: {0}", ViewData["brojProizvoda"]);
+            //Console.WriteLine("proizvodi: {0}", ViewData["brojProizvoda"]);
             //bool property za boju buttona
             return View();
         }
