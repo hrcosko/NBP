@@ -52,6 +52,10 @@ namespace dotnet_practise.Controllers
             }
 
             ViewData["items"] = stanjePr;
+            ViewData["brojProizvoda"] = stanjePr.Count;
+            Globals.brPr = stanjePr.Count;
+            Console.WriteLine("proizvodi u kosarici: {0}", ViewData["brojProizvoda"]);
+            
             return View();
         }
 

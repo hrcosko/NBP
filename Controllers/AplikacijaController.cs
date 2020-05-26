@@ -23,6 +23,7 @@ namespace dotnet_practise.Controllers
         {
             IList<Proizvod> items = new List<Proizvod>();
             IList<String> preporuceno = new List<String>();
+            ViewData["brojProizvoda"] = Globals.brPr;
 
             preporuceno = Baza.ZaPreporuku();
 
@@ -34,6 +35,7 @@ namespace dotnet_practise.Controllers
 
             ViewData["items"] = items;
             ViewData["preporuceno"] = preporuceno;
+            Console.WriteLine("proizvodi: {0}", ViewData["brojProizvoda"]);
             //bool property za boju buttona
             return View();
         }
@@ -51,8 +53,9 @@ namespace dotnet_practise.Controllers
         [HttpPost]
         public ActionResult dodajProizvod(string ime, string cijena)
         {
-            Console.WriteLine("dodajem u kosaricu" + ime);
+            //Console.WriteLine("dodajem u kosaricu" + ime);
             Baza.dodajEvent("add", ime, cijena);
+            Globals.brPr++;
             return RedirectToAction("Index");
         }
     }

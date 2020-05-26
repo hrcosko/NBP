@@ -50,7 +50,7 @@ namespace dotnet_practise.Services
             var streamName = Globals.streamName;
             var eventType = "";
             var data = "{ \"Name\": \"";
-            String timeStamp = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK");
+            String timeStamp = DateTime.Now.ToString("yyyyï¿½-ï¿½MMï¿½-ï¿½ddï¿½Tï¿½HHï¿½:ï¿½mmï¿½:ï¿½ss.fffffffK");
             var metadata = "{ \"User\": \"korisnik\", \"TimeStamp\": \"";
             metadata += timeStamp;
             metadata += "\"}";
@@ -90,7 +90,7 @@ namespace dotnet_practise.Services
             var eventData = step1EventData.ToArray();
 
             conn.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData).Wait();
-            Console.WriteLine($"Uploadano {step1EventData.Count} eventa u '{Globals.streamName}'");
+            //Console.WriteLine($"Uploadano {step1EventData.Count} eventa u '{Globals.streamName}'");
 
             conn.Close();
         }
@@ -132,8 +132,8 @@ namespace dotnet_practise.Services
                 currentSlice = conn.ReadStreamEventsForwardAsync(Globals.streamName, nextSliceStart, 100, true).Result;
                 foreach (var evt in currentSlice.Events)
                 {
-                    Console.WriteLine(Encoding.UTF8.GetString(evt.Event.Metadata, 0, evt.Event.Metadata.Length));
-                    Console.WriteLine(Encoding.UTF8.GetString(evt.Event.Data, 0, evt.Event.Data.Length));
+                    //Console.WriteLine(Encoding.UTF8.GetString(evt.Event.Metadata, 0, evt.Event.Metadata.Length));
+                    //Console.WriteLine(Encoding.UTF8.GetString(evt.Event.Data, 0, evt.Event.Data.Length));
                     dynamic metadata = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Metadata));
                 if ("korisnik".Equals(metadata.User.ToString()))
                 {
@@ -186,14 +186,14 @@ namespace dotnet_practise.Services
                             if ("Purchased".Equals(eventType))
                             {
                                 purchasedIn5min = true;
-                                Console.WriteLine(metadata.TimeStamp.ToString());
-                                time = DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null);
+                                //Console.WriteLine(metadata.TimeStamp.ToString());
+                                time = DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyyï¿½-ï¿½MMï¿½-ï¿½ddï¿½Tï¿½HHï¿½:ï¿½mmï¿½:ï¿½ss.fffffffK", null);
                                 //time = DateTime.Parse(metadata.TimeStamp.ToString());
                             }
                         }
                         else
                         {
-                            if (time.Subtract(DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null)) < TimeSpan.FromMinutes(5))
+                            if (time.Subtract(DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyyï¿½-ï¿½MMï¿½-ï¿½ddï¿½Tï¿½HHï¿½:ï¿½mmï¿½:ï¿½ss.fffffffK", null)) < TimeSpan.FromMinutes(5))
                             {
                                 if ("ItemRemoved".Equals(eventType))
                                 {

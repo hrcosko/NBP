@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace dotnet_practise.Models
 {
+    
     public class Proizvod
     {
         public string Name;

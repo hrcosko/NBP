@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cfTHiqJSTnuWqFiV95tr7zlip+GgYR07iVRht8d+S2ehgnq7CCU/QaY9zwLaetv9o8zcL2om2aWLXktfe3ldUA==",
+  "dgSpecHash": "OAWjXhgILUsxUJab4CJ4hjGaPPcT2mUEiLn50AoYdfffKDRJTbTSGxOVHkzs0xsKddmSrLnRNzwe28caCLF51A==",
   "success": true,
-  "projectFilePath": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/dotnet_practise/dotnet_practise.csproj",
+  "projectFilePath": "/media/hrcosko/93206d94-aa17-4276-9761-df63c3c01ce1/dotnet/NBP/dotnet_practise.csproj",
   "expectedPackageFiles": [
     "/home/hrcosko/.nuget/packages/eventstore.client/5.0.8/eventstore.client.5.0.8.nupkg.sha512",
     "/home/hrcosko/.nuget/packages/microsoft.netcore.platforms/2.1.0/microsoft.netcore.platforms.2.1.0.nupkg.sha512",
