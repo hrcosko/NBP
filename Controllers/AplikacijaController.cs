@@ -21,13 +21,20 @@ namespace dotnet_practise.Controllers
 
         public IActionResult Index()
         {
-            IList<String> itemList = new List<String>();
-            var streamEvents = Baza.procitajSveEvente();
+            IList<Proizvod> items = new List<Proizvod>();
+            IList<String> preporuceno = new List<String>();
 
-            foreach (var evt in streamEvents)
-                itemList.Add(Encoding.UTF8.GetString(evt.Event.Data));
-                
-            ViewData["items"] = itemList;
+            preporuceno = Baza.ZaPreporuku();
+
+            using (StreamReader r = new StreamReader("./samples/items.json"))
+            {
+                string json = r.ReadToEnd();
+                items = JsonConvert.DeserializeObject<List<Proizvod>>(json);
+            }
+
+            ViewData["items"] = items;
+            ViewData["preporuceno"] = preporuceno;
+            //bool property za boju buttona
             return View();
         }
 
@@ -36,11 +43,17 @@ namespace dotnet_practise.Controllers
 
         public string Welcome(string name, int ID = 1)
         {
-            //Baza.napuniStream();
             
             return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
 
         }
 
+        [HttpPost]
+        public ActionResult dodajProizvod(string ime, string cijena)
+        {
+            Console.WriteLine("dodajem u kosaricu" + ime);
+            Baza.dodajEvent("add", ime, cijena);
+            return RedirectToAction("Index");
+        }
     }
 }

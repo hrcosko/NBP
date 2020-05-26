@@ -2,31 +2,48 @@
     ViewData["Title"] = "Aplikacija";
 }
 
-<div class="text-center">
-    <h1 class="display-4"> Aplikacija za praćenje korisničkih radnji pomoću Eventstore baze</h1>
-    <p>Koristimo  <a href="https://eventstore.com"> Evenstore </a>bazu podataka.</p>
+    <div class="text-center">
+        <h1 class="display-4"> Aplikacija za praćenje korisničkih radnji pomoću Event store baze</h1>
+        <p>Koristimo  <a href="https://eventstore.com"> Evenstore </a>bazu podataka.</p>
 
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Proizvod</th>
-          </tr>
-        </thead>
-        <tbody>
-            @{int id = 1;}
-            @foreach (var item in ViewData["items"] as IList<String>)
-            {
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <th scope="row">@id</th>
-                    <td>@item</td>
-                    <td><input type="submit" name="add" value="Dodaj u košaricu" class="btn btn-outline-dark" /></td>
+                    <th scope="col">#</th>
+                    <th scope="col">Proizvod</th>
+                    <th scope="col">Cijena</th>
                 </tr>
-                id++;
-            }
-        </tbody>
-    </table>
-    
-</div>
+            </thead>
+            <tbody>
+                @{int id = 1;}
+                @foreach (var item in ViewData["items"] as IList<Proizvod>)
+                {
+                    <tr>
+                        <form method="post" action="@Url.Action("dodajProizvod", "Aplikacija")">
+                            <th scope="row">@id</th>
+                            <td><input type="hidden" name="ime" value="@item.Name" />@item.Name</td>
+                            <td><input type="hidden" name="cijena" value=@item.Price />@item.Price</td>
+                            <td>
+                                @{bool pr = false;}
+                                @foreach(var p in ViewData["preporuceno"] as IList<String>)
+                                {
+                                    if(p.Equals(item.Name)){
+                                        <input type="submit" name="add" value="Dodaj u košaricu &#x00A; PREPORUČENO" id="btn" class="btn btn-outline-success" />
+                                        pr = true;
+                                        break;
+                                    }
+                                }
+                                @if(!pr){
+                                    <input type="submit" name="add" value="Dodaj u košaricu" id="btn" class="btn btn-outline-dark" />
+                                }
+                            </td>
+                        </form>
+                    </tr>
+                    id++;
+                }
+            </tbody>
+        </table>
+
+    </div>
 
 

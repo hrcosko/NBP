@@ -3,7 +3,7 @@
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1167",
         "eventType": "ItemAdded",
         "data": {
-            "Description": "Xbox One Elite (Console)",
+            "Name": "Xbox One Elite (Console)",
             "Price": 1500
         },
         "metadata": {
@@ -11,17 +11,17 @@
             "TimeStamp": "2016-12-23T10:00:00.9225401+01:00"
         }
     },
-        {
+    {
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1164",
         "eventType": "ItemAdded",
         "data": {
-            "Name": "Xbox One S 1TB (Console)"
+            "Name": "Xbox One S 1TB (Console)",
             "Price": 3123
         },
-            "metadata": {
-                "User": "user2",
-                "TimeStamp": "2016-12-23T08:00:00.9225401+01:00"
-            }
+        "metadata": {
+            "User": "user2",
+            "TimeStamp": "2016-12-23T08:00:00.9225401+01:00"
+        }
     },
     {
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1174",
@@ -39,7 +39,7 @@
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1165",
         "eventType": "ItemAdded",
         "data": {
-            "Name": "Xbox One S 500GB (Console)"
+            "Name": "Xbox One S 500GB (Console)",
             "Price": 3231
         },
         "metadata": {
@@ -59,17 +59,17 @@
             "TimeStamp": "2016-12-23T09:05:00.9225401+01:00"
         }
     },
-        {
+    {
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1166",
         "eventType": "ItemAdded",
         "data": {
-            "Name": "Xbox One S Minecraft Edition (Console)"
-             "Price": 343
+            "Name": "Xbox One S Minecraft Edition (Console)",
+            "Price": 343
         },
-            "metadata": {
-                "User": "user2",
-                "TimeStamp": "2016-12-23T10:00:00.9225401+01:00"
-            }
+        "metadata": {
+            "User": "user2",
+            "TimeStamp": "2016-12-23T10:00:00.9225401+01:00"
+        }
     },
     {
         "eventId": "b989fe21-9469-4017-8d71-9820b8dd1176",
@@ -91,19 +91,20 @@
             "Price": 50000
         },
         "metadata": {
-            "User": "user4"
+            "User": "user4",
             "TimeStamp": "2016-12-23T10:05:00.9225401+01:00"
         }
-        {
-            "eventId": "b999fe21-9469-4017-8d81-9824b8dd1266",
-            "eventType": "ItemAdded",
-            "data": {
-                "Name": "bla",
-                "Price": 50000
-            },
-            "metadata": {
-                "User": "user4",
-                "TimeStamp": "2016-12-23T10:05:00.9225401+01:00"
-            }
+    },
+    {
+        "eventId": "b999fe21-9469-4017-8d81-9824b8dd1266",
+        "eventType": "ItemAdded",
+        "data": {
+            "Name": "bla",
+            "Price": 50000
+        },
+        "metadata": {
+            "User": "user4",
+            "TimeStamp": "2016-12-23T10:05:00.9225401+01:00"
         }
+    }
 ]
