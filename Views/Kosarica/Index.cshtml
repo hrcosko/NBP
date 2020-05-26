@@ -29,6 +29,11 @@
                 </tr>
                 id++;
             }
+            <tr>
+                <td></td>
+                <td>Ukupno: </td>
+                <td>@ViewData["ukupno"]</td>
+            </tr>
         </tbody>
     </table>
     <form method="post" action="@Url.Action("kupi", "Kosarica")">

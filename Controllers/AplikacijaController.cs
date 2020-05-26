@@ -34,6 +34,7 @@ namespace dotnet_practise.Controllers
                 items = JsonConvert.DeserializeObject<List<Proizvod>>(json);
             }
 
+            Globals.items = items;
             ViewData["items"] = items;
             ViewData["preporuceno"] = preporuceno;
             Console.WriteLine("proizvodi: {0}", ViewData["brojProizvoda"]);

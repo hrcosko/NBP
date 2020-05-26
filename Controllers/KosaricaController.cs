@@ -29,15 +29,16 @@ namespace dotnet_practise.Controllers
             IList<string> stanje = new List<string>(); //lista stringova s imenima proizvoda u kosarici
 
             IList<Proizvod> stanjePr = new List<Proizvod>(); //lista proizvoda u kosarici
-
-
-            stanje = Baza.dohvatiKosaricuZaKorisnika();
+            
 
             using (StreamReader r = new StreamReader("./samples/items.json"))
             {
                 string json = r.ReadToEnd();
                 items = JsonConvert.DeserializeObject<List<Proizvod>>(json);
             }
+            Globals.items = items;
+
+            stanje = Baza.dohvatiKosaricuZaKorisnika();
 
 
             foreach (var it in stanje)
@@ -56,7 +57,7 @@ namespace dotnet_practise.Controllers
             ViewData["brojProizvoda"] = stanjePr.Count;
             Globals.brPr = stanjePr.Count;
             Console.WriteLine("proizvodi u kosarici: {0}", ViewData["brojProizvoda"]);
-            
+            ViewData["ukupno"] = Globals.ukupnaCijena.ToString();
             return View();
         }
 

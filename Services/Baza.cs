@@ -164,13 +164,23 @@ namespace dotnet_practise.Services
                         case "ItemAdded":
                             dynamic data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
                             stanjeKosarice.Add(data.Name.ToString());
+                            Globals.ukupnaCijena += Int32.Parse(data.Price.ToString());
                             break;
                         case "ItemRemoved":
                             data = JObject.Parse(Encoding.UTF8.GetString(evt.Event.Data));
                             stanjeKosarice.RemoveAt(stanjeKosarice.LastIndexOf(data.Name.ToString()));
+                            foreach(var item in Globals.items)
+                            {
+                                if (data.Name.ToString().Equals(item.Name))
+                                {
+                                    Globals.ukupnaCijena -= Int32.Parse(item.Price);
+                                    break;
+                                }
+                            }
                             break;
                         case "Purchased":
                             stanjeKosarice = new List<string>();
+                            Globals.ukupnaCijena = 0;
                             break;
                         }
                     }
@@ -180,6 +190,7 @@ namespace dotnet_practise.Services
             } while (!currentSlice.IsEndOfStream);
             conn.Close();
             //Console.WriteLine(stanjeKosarice.Count.ToString());
+            Console.WriteLine(Globals.ukupnaCijena.ToString());
             return stanjeKosarice;
         }
 
