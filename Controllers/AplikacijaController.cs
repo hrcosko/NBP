@@ -21,6 +21,7 @@ namespace dotnet_practise.Controllers
 
         public IActionResult Index()
         {
+            Baza.dodajEvent("Aplikacija");
             IList<Proizvod> items = new List<Proizvod>();
             IList<String> preporuceno = new List<String>();
             ViewData["brojProizvoda"] = Globals.brPr;

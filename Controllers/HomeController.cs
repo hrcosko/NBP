@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using dotnet_practise.Models;
+using dotnet_practise.Services;
 
 namespace dotnet_practise.Controllers
 {
@@ -20,11 +21,13 @@ namespace dotnet_practise.Controllers
 
         public IActionResult Index()
         {
+            Baza.dodajEvent("Home");
             return View();
         }
 
         public IActionResult Privacy()
         {
+            Baza.dodajEvent("Upute");
             return View();
         }
 

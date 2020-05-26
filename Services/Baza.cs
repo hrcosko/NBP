@@ -50,7 +50,7 @@ namespace dotnet_practise.Services
             var streamName = Globals.streamName;
             var eventType = "";
             var data = "{ \"Name\": \"";
-            String timeStamp = DateTime.Now.ToString("yyyy�-�MM�-�dd�T�HH�:�mm�:�ss.fffffffK");
+            String timeStamp = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK");
             var metadata = "{ \"User\": \"korisnik\", \"TimeStamp\": \"";
             metadata += timeStamp;
             metadata += "\"}";
@@ -71,6 +71,26 @@ namespace dotnet_practise.Services
                 case "final":
                     eventType = "Purchased";
                     data = "";
+                    break;
+                case "Home":
+                    eventType = "Pocetna";
+                    streamName = "click";
+                    data = "{ }";
+                    break;
+                case "Upute":
+                    eventType = "Upute";
+                    streamName = "click";
+                    data = "{ }";
+                    break;
+                case "Kosarica":
+                    eventType = "Kosarica";
+                    streamName = "click";
+                    data = "{ }";
+                    break;
+                case "Aplikacija":
+                    eventType = "Aplikacija";
+                    streamName = "click";
+                    data = "{ }";
                     break;
             }
 
@@ -187,13 +207,13 @@ namespace dotnet_practise.Services
                             {
                                 purchasedIn5min = true;
                                 //Console.WriteLine(metadata.TimeStamp.ToString());
-                                time = DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy�-�MM�-�dd�T�HH�:�mm�:�ss.fffffffK", null);
+                                time = DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null);
                                 //time = DateTime.Parse(metadata.TimeStamp.ToString());
                             }
                         }
                         else
                         {
-                            if (time.Subtract(DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy�-�MM�-�dd�T�HH�:�mm�:�ss.fffffffK", null)) < TimeSpan.FromMinutes(5))
+                            if (time.Subtract(DateTime.ParseExact(metadata.TimeStamp.ToString(), "yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK", null)) < TimeSpan.FromMinutes(5))
                             {
                                 if ("ItemRemoved".Equals(eventType))
                                 {

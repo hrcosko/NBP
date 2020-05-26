@@ -23,6 +23,7 @@ namespace dotnet_practise.Controllers
 
         public IActionResult Index()
         {
+            Baza.dodajEvent("Kosarica");
             IList<Proizvod> items = new List<Proizvod>(); //lista svih proizvoda
 
             IList<string> stanje = new List<string>(); //lista stringova s imenima proizvoda u kosarici
