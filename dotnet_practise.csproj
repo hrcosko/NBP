@@ -8,4 +8,8 @@
     <PackageReference Include="EventStore.Client" Version="5.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\img\poznata_baza.png" />
+  </ItemGroup>
+
 </Project>
