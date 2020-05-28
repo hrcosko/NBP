@@ -3,4 +3,29 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h2> Naša aplikacija:</h2>
+<ul>
+    <li>opisuje proces online kupnje </li>
+    <li>svi klikovi na aplikaciji su zabilježeni u bazu </li>
+    <li>eventi se bilježe preko dva streama</li>
+    <li>preporuka proizvoda na temelju prošle kupnje</li>
+</ul>
+
+<h2> Stanje košarice:</h2>
+<ul>
+    <li>prolazimo po eventima u bazi (user == korisnik) </li>
+    <li> generiramo listu i računamo ukupnu cijenu: </li>
+    <ul>
+        <li> ako je event tipa ItemAdded dodati ime proizvoda i povećati ukupnu cijenu </li>
+        <li> ako je event tipa ItemRemoved izbaciti ime proizvoda i umanjiti ukupnu cijenu </li>
+    </ul>
+</ul>
+
+<h2> Preporuka proizvoda:</h2>
+<ul>
+    <li>prolazimo po eventima u bazi (user == korisnik) </li>
+    <li>pretražujemo od najmlađeg prema najstarijem eventu </li>
+    <li> kada naiđeš na prvi event tipa Purchased zapamti mu vrijeme </li>
+    <li> ako je vrijeme eventa <= (zapamćeno vrijeme - 5 min) i event tipa ItemRemoved dodati ime proizvoda u listu</li>
+
+</ul>

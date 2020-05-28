@@ -1,113 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Početna";
 }
-<div>
-    <h1 class="display-4 text-center"> NBP - Eventstore app</h1>
-    <p class="text-center">Koristimo  <a href="https://eventstore.com"> EventStore bazu podataka </a>.</p>
 
-    <p class="text-left">
-        <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapseExample">
-            <h2> EventStore baza:</h2>
-        </button>
-        <div class="collapse show" id="collapse1">
-            <ul>
-                <li>sastoji se od EVENATA (json dokumenti) </li>
-                <li>event služi za pohranu podataka koji opisuju određeni događaj</li>
-                <li>podatke ne mijenjamo</li>
-                <li>unos podataka u bazu i čitanje podataka (nema brisanja)</li>
-            </ul>
-            <div class="text-left"> &#8594; na taj način dobivamo nepromjenjive podatke koji bilježe svaku promjenu sustava, umjesto trenutačnog stanje sustava</div>
-            <div class="text-left"> &#8594; naš primjer: eventi koji opisuju proces online kupnju </div>
-        </div>
-    </p>
-
-    <p class="text-left">
-        <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapseExample">
-            <h2>  Eventi koje koristimo: </h2>
-        </button>
-
-        <div class="collapse" id="collapse2">
-    <p class="text-left">
-        {
-        <ul>
-    <p>"eventId": "b989fe21-9469-4017-8d71-9820b8dd1167",
-    <p>"eventType": "ItemAdded",
-    <p>
-        "data": {
-        <ul>
-    <p>"Name": "Xbox One Elite (Console)",
-    <p>
-        "Price": "100"
-        </ul>
-    <p>},
-    <p>
-        "metadata": {
-        <ul>
-    <p>"TimeStamp": "2016-12-23T10:00:00.9225401+01:00",
-    <p>
-        "User": "Marko"
-        </ul>
-        </ul>
-    <p>
-        }
-    </p>
-
-    <p class="text-left">
-        {
-        <ul>
-    <p>"eventId": "b989fe21-9469-4017-8d71-9820b8dd1167",
-    <p>"eventType": "Purchased",
-    <p>
-        "metadata": {
-        <ul>
-    <p>"TimeStamp": "2016-12-23T10:00:00.9225401+01:00",
-    <p>
-        "User": "Marko"
-        </ul>
-        </ul>
-    <p>
-        }
-
-    </p>
-</div>
-</p>
-
-<p class="text-left">
-    <button class="btn btn-outline-dark text-left" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapseExample">
-        <h2>Razlika između EventStore baze podataka i objektno orijentiranih baza na primjeru košarice: </h2>
-    </button>
-
-    <div class="collapse" id="collapse3">
-<p class="text-left">
-    Objektno orijentirana baza:
-    <ul>
-        <li>objekta "Košarica" sadrži listu koja se puni kako ubacujemoproizvode u nju, ili izbacujemo </li>
-        <li>u određenom trenutku podatak o stanju košarice saznamajemo direktno iz jednog zapisa </li>
-    </ul>
-</p>
-
-<p class="text-left">
-    Evenstore:
-    <ul>
-        <li>svaka akcija dodavanja (izbacivanja) proizvoda u košaricu je zabilježena kao zaseban event </li>
-        <li>u određenom trenutku podatak o stanju  košarice dobivamo na temelju svih evenata nad kojima radimo zbroj (+1 dodavanje, -1 izbacivanje) na razini pojedinog proizvoda za određenog usera </li>
-    </ul>
-</p>
-</div>
-    </p>
-
-<button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapseExample">
-    <h2>Primjena/potreba:</h2>
-</button>
-<div class="collapse" id="collapse4">
-    <p class="text-left">
-        <ul>
-            <li>audit log (podaci iz kojih se može proizvesti svaki napravljen korak koji je doveo u sustav u trenutačno stanje, legalna potreba)
-            <li>analitika za BI vrijednost podataka u
-            <li>rekreirnaje sustava
-            <li>snapshots
-        </ul>
-    </p>
-</div>
+<div class="text-center">
+    <h1 class="display-4"> NBP - Eventstore app</h1>
+    <p><a href="https://eventstore.com">    <img src="https://codeopinion.com/wp-content/uploads/2015/06/Logo.png" alt="EventStore" width="500"> </a></p>
 
 </div>
+<h2> EventStore baza:</h2>
+<ul>
+    <li>sastoji se od EVENATA (json dokumenti) </li>
+    <li>event služi za pohranu promjene stanja </li>
+    <li>podatke ne mijenjamo</li>
+    <li>unos podataka u bazu i čitanje podataka (nema brisanja niti ažuriranja)</li>
+</ul>
+<p> &#8594; na taj način dobivamo nepromjenjive podatke koji bilježe svaku promjenu sustava, umjesto trenutačnog stanje sustava</p>
+
+<br>
+<h2>Razlike objekno objentirane baze i eventstora</h2>
+<img src = "~/img/poznata_baza.png" alt="NORTHWIND" width="700"/>
+<img src="~/img/event.png" alt="NORTHWIND" height="200" />
+
